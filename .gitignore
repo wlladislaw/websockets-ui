@@ -14,3 +14,15 @@ Thumbs.db
 
 # Logs
 npm-debug.log
+
+# ignore build files
+dist
+build
+
+# ignore test converage
+coverage
+
+# Environment varibles
+*.env
+*.env.test
+*.env copy
