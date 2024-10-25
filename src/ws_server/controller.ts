@@ -1,5 +1,7 @@
 import { RawData, WebSocket } from 'ws';
 import { registration } from './handlers/registration';
+import { createRoom } from './handlers/createRoom';
+import { addToRoom } from './handlers/addToRoom';
 
 export function controller(ws: WebSocket, data: RawData) {
   const stringReq = JSON.parse(data.toString());
@@ -7,9 +9,12 @@ export function controller(ws: WebSocket, data: RawData) {
     case 'reg':
       registration(ws, data);
       break;
-    // case 'create_room':
-    //   createRoom(ws, request);
-    //   break;
+    case 'create_room':
+      createRoom(ws, data);
+      break;
+    case 'add_user_to_room':
+      addToRoom(ws, data);
+      break;
 
     default:
       console.log('unknown request type:', stringReq.type);

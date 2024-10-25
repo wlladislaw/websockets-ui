@@ -6,6 +6,7 @@ export const registration = (ws: WebSocket, data: RawData) => {
   const { name, password } = JSON.parse(data.toString());
 
   if (players[name]) {
+    console.log('players[name]: ', players[name]);
     ws.send(
       JSON.stringify({
         type: 'reg',

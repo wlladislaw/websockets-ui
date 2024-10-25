@@ -17,4 +17,12 @@ ws.on('connection', (ws) => {
     console.log('error occurred');
   };
 });
+
+export function broadcast(message:) {
+  ws.clients.forEach((client) => {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(JSON.stringify(message));
+    }
+  });
+}
 console.log('WebSocket serveur coucou on port 3000');
