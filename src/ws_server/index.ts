@@ -1,4 +1,4 @@
-import { WebSocketServer } from 'ws';
+import { WebSocket, WebSocketServer } from 'ws';
 import { controller } from './controller';
 import { players, rooms } from '../db';
 
@@ -37,7 +37,7 @@ export function broadcastUpdateWinners() {
   });
 }
 
-export function findPlayerByWebSocket(ws: WebSocket) {
+export function findPlayerByWebSocket(ws:WebSocket) {
   return Object.values(players).find((player) => player.ws === ws);
 }
 

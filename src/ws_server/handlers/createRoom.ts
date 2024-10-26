@@ -1,11 +1,9 @@
-import {  WebSocket } from 'ws';
+import { WebSocket } from 'ws';
 import { rooms } from '../../db';
 import { broadcastUpdateRoom, findPlayerByWebSocket } from '../index';
 
 export const createRoom = (ws: WebSocket) => {
   let roomIdCounter = 1;
-
-
 
   const player = findPlayerByWebSocket(ws);
   console.log('player:By WS ', player);

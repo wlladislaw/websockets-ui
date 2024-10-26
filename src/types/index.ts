@@ -1,7 +1,11 @@
+import { WebSocket } from "ws";
+
 type Player = {
   name: string;
   password: string;
   wins: number;
+  ws:WebSocket;
+  index:number;
 };
 
 export type Players = {
@@ -10,11 +14,16 @@ export type Players = {
 
 export type Room = {
   roomId: number;
-  players: Players[];
+  players: Player[];
 };
 
+export type Rooms = {
+  [key:number]: Room
+}
+
 export type Game = {
-  gameId: Room;
+  gameId: number;
+  
 };
 
 export type Games = {
