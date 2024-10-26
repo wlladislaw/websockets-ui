@@ -1,12 +1,12 @@
 import { RawData, WebSocket } from 'ws';
 import { players } from '../../db';
+import { broadcastUpdateRoom, broadcastUpdateWinners } from '..';
 
 export const registration = (ws: WebSocket, data: RawData) => {
-  let id = 0;
-  const { name, password } = JSON.parse(data.toString());
+  let playerIndex = 0;
+  const { name, password } = JSON.parse(JSON.parse(data.toString()).data);
 
   if (players[name]) {
-    console.log('players[name]: ', players[name]);
     ws.send(
       JSON.stringify({
         type: 'reg',
@@ -15,9 +15,10 @@ export const registration = (ws: WebSocket, data: RawData) => {
       }),
     );
   } else {
-    players[name] = { password, wins: 0 };
-    const playerId = id;
-    id++;
+    const playerId = playerIndex++;
+
+    const newPlayer = { name: name, password: password, wins: 0, index: playerId, ws };
+    players[newPlayer.index] = newPlayer;
     ws.send(
       JSON.stringify({
         type: 'reg',
@@ -25,5 +26,8 @@ export const registration = (ws: WebSocket, data: RawData) => {
         id: 0,
       }),
     );
+
+    broadcastUpdateRoom();
+    broadcastUpdateWinners();
   }
 };

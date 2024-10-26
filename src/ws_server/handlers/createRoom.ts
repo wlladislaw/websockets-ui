@@ -1,23 +1,18 @@
-import { RawData, WebSocket } from 'ws';
+import {  WebSocket } from 'ws';
 import { rooms } from '../../db';
-import { broadcast } from '../index';
+import { broadcastUpdateRoom, findPlayerByWebSocket } from '../index';
 
-export const createRoom = (ws: WebSocket, data: RawData) => {
-  let roomId = 0;
-  rooms[roomId] = { players: [ws], id: roomId };
-  broadcast({
-    type: 'update_room',
-    data: JSON.stringify({
-      roomId: 1,
-      roomUsers: [
-        {
-          name: 'user',
-          index: 1,
-        },
-      ],
-      id: 0,
-    }),
-  });
-  roomId++;
-  console.log('rooms: ', rooms);
+export const createRoom = (ws: WebSocket) => {
+  let roomIdCounter = 1;
+
+
+
+  const player = findPlayerByWebSocket(ws);
+  console.log('player:By WS ', player);
+  if (!player) return;
+
+  const newRoom = { roomId: roomIdCounter++, players: [player] };
+  console.log('newRoom: ', newRoom);
+  rooms[newRoom.roomId] = newRoom;
+  broadcastUpdateRoom();
 };
