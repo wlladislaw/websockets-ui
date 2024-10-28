@@ -2,8 +2,8 @@ import { RawData, WebSocket } from 'ws';
 import { players } from '../../db';
 import { broadcastUpdateRoom, broadcastUpdateWinners } from '..';
 
+let playerIndex = 0;
 export const registration = (ws: WebSocket, data: RawData) => {
-  let playerIndex = 0;
   const { name, password } = JSON.parse(JSON.parse(data.toString()).data);
 
   if (players[name]) {
@@ -15,7 +15,8 @@ export const registration = (ws: WebSocket, data: RawData) => {
       }),
     );
   } else {
-    const playerId = playerIndex++;
+    playerIndex++;
+    const playerId = playerIndex;
 
     const newPlayer = { name: name, password: password, wins: 0, index: playerId, ws };
     players[newPlayer.index] = newPlayer;

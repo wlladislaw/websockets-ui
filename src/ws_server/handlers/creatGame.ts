@@ -1,11 +1,17 @@
 import { games } from '../../db';
 import { Room } from '../../types';
 
-export function startGame(room: Room) {
-  console.log('room: ', room);
-  let gameIdCounter = 1;
+export function createGame(room: Room) {
+  let gameIdCounter = 0;
   const gameId = gameIdCounter++;
-  games[gameId] = { roomId: room.roomId, players: room.players };
+
+  games[gameId] = {
+    gameId,
+    roomId: room.roomId,
+    players: room.players,
+    board: {},
+    currentPlayerTurn: room.players[0].index,
+  };
 
   room.players.forEach((player) => {
     player.ws.send(

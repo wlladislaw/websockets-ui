@@ -22,9 +22,8 @@ ws.on('connection', (ws) => {
 export function broadcastUpdateRoom() {
   const roomData = Object.values(rooms).map((room) => ({
     roomId: room.roomId,
-    roomUsers: room.players.map((player) => ({ name: player.name, index: player.index })),
+    roomUsers: room.players.map((player) => JSON.stringify({ name: player.name, index: player.index })),
   }));
-  console.log('roomData: ', roomData);
   ws.clients.forEach((client) => {
     client.send(JSON.stringify({ type: 'update_room', data: JSON.stringify(roomData), id: 0 }));
   });
@@ -37,7 +36,7 @@ export function broadcastUpdateWinners() {
   });
 }
 
-export function findPlayerByWebSocket(ws:WebSocket) {
+export function findPlayerByWebSocket(ws: WebSocket) {
   return Object.values(players).find((player) => player.ws === ws);
 }
 
