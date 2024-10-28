@@ -5,9 +5,10 @@
   "main": "index.ts",
   "type": "module",
   "scripts": {
-    "start": "tsx ./index.ts",
+    "start:http": "tsx ./index.ts",
     "start:dev": "tsx watch ./index.ts",
     "start:ws": "tsx watch ./src/ws_server/index.ts",
+    "start": "npm run start:dev & npm run start:ws",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
     "format": "prettier . --write",

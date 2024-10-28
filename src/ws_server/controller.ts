@@ -4,6 +4,7 @@ import { createRoom } from './handlers/createRoom';
 import { addToRoom } from './handlers/addToRoom';
 import { addShips } from './handlers/addShips';
 import { attack } from './handlers/attack';
+import { randomAttack } from './handlers/randomAttack';
 
 export function controller(ws: WebSocket, data: RawData) {
   const stringReq = JSON.parse(data.toString());
@@ -17,12 +18,15 @@ export function controller(ws: WebSocket, data: RawData) {
     case 'add_user_to_room':
       addToRoom(ws, data);
       break;
-      case 'add_ships':
-        addShips(ws, data);
-        break;
-        case 'attack':
-          attack(ws, data);
-          break;
+    case 'add_ships':
+      addShips(ws, data);
+      break;
+    case 'attack':
+      attack(ws, data);
+      break;
+    case 'randomAttack':
+      randomAttack(ws, data);
+      break;
 
     default:
       console.log('unknown request type:', stringReq.type);

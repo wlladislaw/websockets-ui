@@ -10,7 +10,9 @@
 
 ## Usage
 
-1. Start http by npm run start and start ws by npm run start:ws
+`npm run start` - START HTTP and WS
+
+1. Start http by npm run start and start WS by npm run start:ws
 
 **Development**
 | `npm run start:ws` | Start websocket with watcher |
@@ -22,18 +24,17 @@
 **Production**
 
 `npm run start`
-
-- App served @ `http://localhost:8181` without nodemon
+START ALL 2 server without nodemon
 
 ---
 
 **All commands**
 
-| Command             | Description                                          |
-| ------------------- | ---------------------------------------------------- |
-| `npm run start:dev` | App served @ `http://localhost:8181` with nodemon    |
-| `npm run start`     | App served @ `http://localhost:8181` without nodemon |
+| Command             | Description                                       |
+| ------------------- | ------------------------------------------------- |
+| `npm run start:dev` | App served @ `http://localhost:8181` with nodemon |
+| `npm run start`     | START HTTP and WS                                 |
 
-| `npm run start:ws`  | Start websocket with watcher `http://localhost:3000` |
+| `npm run start:ws` | Start websocket with watcher `http://localhost:3000` |
 
 **Note**: replace `npm` with `yarn` in `package.json` if you use yarn.

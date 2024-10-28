@@ -11,7 +11,7 @@ export const addToRoom = (ws: WebSocket, data: RawData) => {
 
   if (!room || !player) return;
 
-  room.players.push(player);
+  if (!room.players.includes(player)) room.players.push(player);
   if (room.players.length === 2) {
     createGame(room);
   }

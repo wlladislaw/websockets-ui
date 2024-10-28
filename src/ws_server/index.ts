@@ -11,7 +11,7 @@ ws.on('connection', (ws) => {
     controller(ws, data);
   });
   ws.on('close', () => {
-    console.log('the client has connected');
+    console.log('client has disconnected');
   });
 
   ws.onerror = function () {
